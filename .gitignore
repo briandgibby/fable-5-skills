@@ -1,0 +1,36 @@
+# Local agent and app state
+.agents/
+.codex/
+
+# Generated evaluation and stage outputs
+evals/runs/*
+!evals/runs/.gitkeep
+workspaces/**/output/*
+!workspaces/**/output/.gitkeep
+
+# Logs and temporary files
+*.log
+*.tmp
+*.temp
+*.bak
+*.swp
+
+# OS and editor noise
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/
+
+# Environment and secrets
+.env
+.env.*
+!.env.example
+
+# Package manager artifacts, if local scripts are added later
+node_modules/
+__pycache__/
+*.pyc
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/

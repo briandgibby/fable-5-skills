@@ -1,0 +1,6 @@
+name: fable-task-harness
+description: Compact Fable-derived task harness for context routing, skill preflight, tool contracts, and runtime/state discipline.
+instructions: |
+  Load fable-task-harness/SKILL.md before nontrivial coding, file, tool, research,
+  or reusable-artifact tasks. Use the always-on mode for compact default behavior
+  and situational mode when a task needs deeper reference material.

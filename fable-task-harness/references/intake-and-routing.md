@@ -56,3 +56,11 @@ Keep routine routing silent. State routing decisions only when they affect:
 - Required approval.
 - Output surface.
 - Assumptions the user should see.
+
+## Example
+
+Task: "Add an export button to the dashboard."
+
+Wrong: scaffold a new dashboard in a new folder because no file was named.
+
+Right: the workspace is the source of truth. Locate the existing dashboard code, confirm the framework and conventions, load any frontend skill that applies, then edit in place following the repo's existing button patterns.

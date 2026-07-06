@@ -1,5 +1,7 @@
 # Initial A/B/C Test Plan: Static Focus Board
 
+> Historical record of run 1 (2026-07-05, harness 0.1.0). The arm design here — always-on versus situational modes — no longer matches the shipped skill, and the methodology was superseded by `protocol.md` after this run exposed its weaknesses (n=1, unfrozen arm prompts, unblinded self-scoring, unmeasured cost). Do not use this plan for new runs.
+
 ## Goal
 
 Compare whether the Fable task harness improves a small but complete implementation task.
@@ -16,7 +18,7 @@ Build a single-file static HTML app called Focus Board. It should let me add, ed
 |------|-------------------|---------------|
 | Control | No harness instructions | `evals/runs/static-focus-board/control/` |
 | Always-on | Load compact `fable-task-harness/SKILL.md` from the start | `evals/runs/static-focus-board/always-on/` |
-| Situational | Start with routing only, then load relevant references as task shape warrants | `evals/runs/static-focus-board/situational/` |
+| Situational | Start with routing only, then load only explicitly allowed references as task shape warrants | `evals/runs/static-focus-board/situational/` |
 
 ## Isolation Rules
 
@@ -25,6 +27,8 @@ Build a single-file static HTML app called Focus Board. It should let me add, ed
 - Use the same frozen prompt for all modes.
 - Use the same available tools and time expectations.
 - Do not manually improve outputs before scoring.
+- For situational runs, do not load `fable-task-harness/SKILL.md` after the run starts unless the test explicitly allows it.
+- Parent review may inspect all outputs only after all three isolated runs are complete.
 
 ## Required Artifacts
 
@@ -44,6 +48,7 @@ Build a single-file static HTML app called Focus Board. It should let me add, ed
 - [ ] Daily summary reflects current state.
 - [ ] Mobile viewport remains usable.
 - [ ] No console errors during basic workflow.
+- [ ] Parent reviewer runs the same browser smoke test against all three outputs before scoring.
 
 ## Scoring
 

@@ -12,4 +12,6 @@ Use this as a compact preflight for nontrivial tasks.
 - [ ] Exact paths, IDs, schemas, or parameters discovered.
 - [ ] Runtime state that must carry forward is captured.
 - [ ] Verification path is known.
+- [ ] Verification depth reached is reported, including blocked rungs.
+- [ ] No unrequested features were built; omitted extras are named instead.
 - [ ] Final result will be accessible to the user.

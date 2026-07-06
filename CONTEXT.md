@@ -12,9 +12,10 @@ This project turns the useful parts of the Fable 5 methodology into practical ag
 | Source verification | `knowledge/sources/2026-07-05-folder-agents-source-ledger.md` | Full file | External source ledger |
 | Harness skill build | `workspaces/fable-task-harness-build/CONTEXT.md` | Full file | Stage map for the main artifact |
 | Folder templates | `_core/templates/` | Relevant template | Scaffold root, workspace, stage, source, or evaluation files |
-| Evaluation candidates | `evals/candidate-simple-projects.md` | Full file | Choose simple projects for harness tests |
-| Evaluation plan | `evals/initial-ab-test-plan.md`, `evals/rubric.md` | Full file | Run and score the first A/B/C test |
+| Evaluation candidates | `evals/candidate-simple-projects.md` | Full file | Choose build and trap tasks for harness tests |
+| Evaluation methodology | `evals/protocol.md`, `evals/rubric.md` | Full file | Run and score any A/B/C test |
 | Installable harness skill | `fable-task-harness/SKILL.md` | Full file | Skill entrypoint |
+| Skill package validation | `scripts/check-skill-package.py` | Run it | Frontmatter, links, and size checks before shipping |
 
 ## Process
 

@@ -33,3 +33,11 @@ Make the result accessible:
 - Mention important assumptions.
 - Report tests or validation run.
 - State anything that remains incomplete.
+
+## Example
+
+Task: "Write me a runbook for the deploy process."
+
+Wrong: paste the runbook into chat and end the turn. The user asked for a reusable artifact; chat text is a fake deliverable.
+
+Right: create `docs/runbooks/deploy.md` following the repo's docs conventions, then reply with the exact path and a one-line summary of what it covers.

@@ -13,8 +13,9 @@ knowledge/sources/                Source ledgers for external research
 knowledge/wiki/                   LLM-maintained synthesis and project tenets
 workspaces/fable-task-harness-build/
                                   Stage contracts for building the harness
-evals/                            A/B/C test plans, rubrics, and run artifacts
+evals/                            Evaluation protocol, arm prompts, rubrics, and run artifacts
 fable-task-harness/               Installable skill package artifact
+scripts/                          Deterministic repo checks
 ```
 
 ## Routing

@@ -28,13 +28,16 @@ knowledge/sources/                Source ledgers for external research
 knowledge/wiki/                   Maintained synthesis and project tenets
 workspaces/fable-task-harness-build/
                                   Stage contracts for building the harness
-evals/                            A/B/C test plans, rubrics, and run artifacts
-fable-task-harness/               Installable skill package artifact
+evals/                            Evaluation protocol, arm prompts, rubrics, and run artifacts
+fable-task-harness/               Installable skill package artifact (versioned; see its CHANGELOG.md)
+scripts/                          Deterministic repo checks
 ```
 
 ## Install
 
-The current install procedure is folder-based. Copy the skill package folder, not the whole repo, into your Codex skills directory:
+The install procedure is folder-based. Copy the skill package folder, not the whole repo, into your agent's skills directory.
+
+Codex:
 
 ```powershell
 $source = (Resolve-Path ".\fable-task-harness").Path
@@ -47,7 +50,17 @@ if (Test-Path -LiteralPath $dest) {
 Copy-Item -Recurse -LiteralPath $source -Destination $dest
 ```
 
-Then restart or reload Codex so the skill registry can pick it up. The skill entrypoint is `fable-task-harness/SKILL.md`; `fable-task-harness/agents/openai.yaml` provides the compact OpenAI-facing loader hint.
+Claude Code: use the same command with `$dest = "$env:USERPROFILE\.claude\skills\fable-task-harness"` (or `.claude\skills\` inside a single project).
+
+Then restart or reload the agent so the skill registry can pick it up. The skill entrypoint is `fable-task-harness/SKILL.md`; `fable-task-harness/agents/openai.yaml` provides the compact OpenAI-facing loader hint.
+
+Before shipping changes to the package, run the deterministic checks:
+
+```powershell
+python scripts\check-skill-package.py
+```
+
+They validate frontmatter YAML, required fields (`name`, `description`, `version`), relative link integrity, and line-count guidance.
 
 ## Development Workflow
 

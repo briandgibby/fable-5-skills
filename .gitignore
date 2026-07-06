@@ -1,6 +1,8 @@
 # Local agent and app state
 .agents/
 .codex/
+.claude/
+.playwright-cli/
 
 # Generated evaluation and stage outputs
 evals/runs/*

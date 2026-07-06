@@ -48,3 +48,11 @@ When continuing after recovery, keep these visible to yourself:
 - Assumptions.
 - Unresolved questions.
 - Verification needed before final response.
+
+## Example
+
+Task: "Pick up where we left off on the importer."
+
+Wrong: immediately ask "Which importer?", or guess and start rebuilding from scratch.
+
+Right: check the conversation, then the workspace — recent commits, importer-named files, TODO or handoff notes — and resume from the recovered state, stating what was found. Ask only if two or more plausible importers remain after that.

@@ -275,3 +275,24 @@ These are candidates only. Any production use should include permission, trust-b
 3. Draft the situational harness.
 4. Choose the first A/B/C test project.
 5. Run the control, always-on, and situational builds in isolated contexts.
+
+## Revision: Post-Eval Restructure (2026-07-05, harness 0.2.0)
+
+The first A/B/C run (`evals/runs/static-focus-board/`) changed several accepted decisions. Summed rubric scores tied control and always-on at 51/55 with situational at 45, the situational arm contaminated its own protocol by loading the full skill, and verification — a core harness pillar — was strongest in the control arm. The sections above are kept as the historical stage record; the decisions below supersede them where they conflict.
+
+Accepted changes to the skill package:
+
+- The always-on/situational/control modes were removed from `SKILL.md`. They were evaluation arms, not product behavior, and situational mode was structurally unenforceable: reading the entrypoint loaded everything anyway. Loading depth is now architectural — `SKILL.md` is only the compact spine, and references load through observable task-shape triggers instead of "when the task shape warrants".
+- References were consolidated so each rule has one canonical home: `tool-sequencing.md` + `parameter-hygiene.md` + `tool-schema-discovery.md` became `tool-contracts.md`; `environment-contract.md` + `structured-output-and-parsing.md` merged into `runtime-and-state-contracts.md`; `tool-card-template.md` guidance moved into `templates/tool-card.md`.
+- `references/verification-playbook.md` was added: per-artifact verification depth ladders with a required report of the depth reached. This responds directly to the run data, where abstract "verify the result" guidance produced weaker verification than no harness at all.
+- An anti-overbuild rule joined the spine after the situational arm shipped unrequested features.
+- Every operational reference now carries one worked wrong-versus-right example, per the project's own "examples over vague prose" tenet.
+- The package is versioned (frontmatter `version` plus `CHANGELOG.md`), and `scripts/check-skill-package.py` lint-checks frontmatter validity, required fields, link integrity, and line-count guidance. The 0.1.0 frontmatter was invalid YAML, which motivated the check.
+
+Accepted changes to evaluation (see `evals/protocol.md`):
+
+- Arms are redefined as control (no harness), harness (spine with trigger-gated references — the product as shipped), and full-load (spine plus all references, to measure ceiling versus cost).
+- A minimum of three runs per arm per task, frozen verbatim arm prompts stored as files, per-run metadata including model ID and harness version, blind scoring with computed totals, and measured rather than estimated cost.
+- Task batteries must include trap tasks with objective ground truth for context recovery, continuation handling, and schema discovery, since greenfield build tasks cannot detect the harness's value.
+
+Open decisions resolved by this revision: routing stays silent unless scope, cost, risk, or approval changes (3); runtime/state discipline lives in references with only the loop in the spine (7). Deep research and trust-boundary filtering remain future separate skills, and roadmap mentions of them were removed from the shipped package (4).

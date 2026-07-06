@@ -1,5 +1,7 @@
 # Tool Card: `<tool name>`
 
+Fill one card per important recurring tool so agents do not treat it as a magic button. Keep the card operational and short. Use exact parameter names only when they are stable, mention schema discovery for dynamic tools, classify side effects clearly, and prefer examples that show sequencing, not just syntax.
+
 ## What It Does
 
 Describe the tool's specific capability.

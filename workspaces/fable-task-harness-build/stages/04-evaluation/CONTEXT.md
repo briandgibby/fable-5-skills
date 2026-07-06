@@ -1,39 +1,43 @@
 # Stage 04: Evaluation
 
-Use this stage when designing or running control, always-on, and situational harness tests.
+Use this stage when designing or running control, harness, and full-load evaluation arms.
 
 ## Inputs
 
 | Source | File/Location | Section/Scope | Why |
 |--------|---------------|---------------|-----|
-| Master plan | `../../../../docs/fable-pseudo-harness-master.md` | A/B/C Test Protocol | Accepted test design |
-| Harness skill | `../../../../fable-task-harness/SKILL.md` | Modes | What is being tested |
+| Protocol | `../../../../evals/protocol.md` | Full file | Governing methodology for every run |
+| Arm prompts | `../../../../evals/arm-prompts/` | Relevant arm files | Frozen verbatim setup text |
+| Harness skill | `../../../../fable-task-harness/SKILL.md` | Frontmatter and Reference Triggers | What is being tested, and its version |
+| Master plan | `../../../../docs/fable-pseudo-harness-master.md` | Revision: Post-Eval Restructure | Accepted test design decisions |
 | Project tenets | `../../../../knowledge/wiki/project-structure-tenets.md` | Build Partial Autonomy First | Evaluation posture |
-| Templates | `../../../../fable-task-harness/templates/harness-checklist.md` | Full file | Checklist basis |
-| Candidate projects | `../../../../evals/candidate-simple-projects.md` | Full file | Test selection |
-| Rubric | `../../../../evals/rubric.md` | Full file | Scoring |
-| Initial plan | `../../../../evals/initial-ab-test-plan.md` | Full file | First run protocol |
+| Candidate projects | `../../../../evals/candidate-simple-projects.md` | Full file | Build and trap task selection |
+| Rubric | `../../../../evals/rubric.md` | Full file | Scoring and process metrics |
 
 ## Process
 
-1. Choose one frozen task prompt.
-2. Define isolated contexts for control, always-on, and situational runs.
-3. Score artifact and process with a blind rubric where practical.
-4. Track repeated corrections as source-improvement signals.
-5. Save evaluation artifacts under `evals/`.
+1. Choose frozen task prompts: at least one build task and one trap task.
+2. Run control, harness, and full-load arms per `protocol.md`: at least 3 isolated runs per arm, verbatim arm prompts, per-run metadata recorded.
+3. Run the uniform objective checks against every run before subjective scoring.
+4. Score blind, unblind, compute totals, and break artifact ties toward lower measured cost.
+5. Track repeated corrections as source-improvement signals with the harness version they apply to.
+6. Save evaluation artifacts under `evals/`.
 
 ## Outputs
 
 | Artifact | Location | Format |
 |----------|----------|--------|
 | Evaluation plan | `../../../../evals/` | Markdown |
-| Run artifacts | `../../../../evals/runs/` | Markdown or project files |
-| Review rubric | `../../../../evals/` | Markdown |
+| Run artifacts and metadata | `../../../../evals/runs/` | Markdown or project files, plus `run-meta.md` per run |
+| Review | `../../../../evals/runs/<task>/review.md` | Markdown per rubric template |
 
 ## Audit
 
 | Check | Pass condition |
 |-------|----------------|
-| Isolation | Runs do not share generated context |
-| Rubric | Correctness, completeness, simplicity, maintainability, UX, tool use, context recovery, verification, speed, and intervention are scored |
+| Isolation | Runs do not share generated context; arm prompts used verbatim |
+| Repetition | At least 3 runs per arm per task |
+| Metadata | Every run folder has `run-meta.md` with model ID and harness version |
+| Scoring integrity | Blind scoring used, totals computed, tie-break rule applied |
+| Rubric | All dimensions and process metrics recorded |
 | Source learning | Recurring corrections are routed back to source files |

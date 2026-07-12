@@ -23,7 +23,12 @@ Changed:
 
 ## 0.2.2 - 2026-07-05
 
-Source improvements from the decoy-config-repo trap battery (`evals/runs/decoy-config-repo/`, 3 runs x 3 arms), the first evaluation with ground truth. No arm fell for the decoy, but harness arms documented the decoy discrepancy 6/6 versus control's 1/3 — the harness's first measured win. Cost stayed modest: roughly +2 tool calls and +7 file reads over control, versus full-load's much larger overhead for identical outcomes.
+Source improvements from the decoy-config-repo trap battery (3 runs x 3 arms;
+tracked receipt: `evals/cases/decoy-config-repo/receipts/harness-v0.2.1.md`),
+the first evaluation with ground truth. No arm fell for the decoy, but harness arms
+documented the decoy discrepancy 6/6 versus control's 1/3 — the harness's first
+measured win. Cost stayed modest: roughly +2 tool calls and +7 file reads over
+control, versus full-load's much larger overhead for identical outcomes.
 
 Changed:
 

@@ -9,6 +9,7 @@ Use this stage when changing folder layout, routing files, workspace contracts, 
 | Project conventions | `../../../../_core/CONVENTIONS.md` | Full file | Canonical rules |
 | Project routing | `../../../../AGENTS.md`, `../../../../CONTEXT.md` | Full file | Current control surface |
 | Research synthesis | `../../../../knowledge/wiki/project-structure-tenets.md` | Recommended Repo Shape and Deferred | Grounding |
+| Harness innovation synthesis | `../../../../knowledge/wiki/agent-harness-innovation-gaps.md` | Architecture Deepening Decisions | Current Module, Interface, Seam, and Adapter decisions |
 | Current tree | Workspace file listing | Full listing | Avoid duplicate homes |
 
 ## Process

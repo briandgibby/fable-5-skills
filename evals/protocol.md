@@ -1,6 +1,9 @@
 # Evaluation Protocol
 
-This is the durable methodology for harness evaluations. Individual test plans define the task; this file defines how every test runs. It supersedes the arm design in `initial-ab-test-plan.md`, which is kept as the record of run 1.
+This is the durable methodology for harness evaluations. Tracked modules under
+`evals/cases/` define individual tasks and objective graders; this file defines how
+every battery runs. It supersedes the arm design in `initial-ab-test-plan.md`, which
+is kept as the record of run 1.
 
 ## Why This Exists
 
@@ -23,6 +26,8 @@ Arm setup text is frozen verbatim in `arm-prompts/`. Use it exactly; any deviati
 
 ## Run Requirements
 
+- Validate tracked cases with `python scripts/check-eval-cases.py` before setup.
+- Create every run from the selected case's exact fixture and frozen prompt.
 - At least 3 runs per arm per task. Report every run; compare medians.
 - Separate, isolated contexts. No run sees another run's output or transcript.
 - Same frozen task prompt, tools, and time expectations for all arms.
@@ -37,6 +42,7 @@ Each run folder must contain a `run-meta.md` with:
 # Run Metadata
 
 - Task:
+- Case version:
 - Arm: control | harness | full-load
 - Run number:
 - Date:
@@ -56,6 +62,7 @@ Metadata rules, added after the decoy-config-repo battery where three runs lacke
 
 - Capture the start timestamp as the first action of the run, not retroactively.
 - Tool calls means top-level assistant tool invocations (a parallel batch counts as one); underlying operations go on their own line.
+- Record measured token usage as `<input>/<output>` integer counts, with optional thousands separators.
 - When the runtime does not expose a value, write the exact literal `not reported` — never leave a line blank or paraphrase.
 
 ## Task Batteries
@@ -71,6 +78,11 @@ Greenfield build tasks alone cannot detect harness value: a frontier model compl
 
 Objective checks must target user-visible capabilities, not implementation details. A smoke test that requires a specific DOM shape — `data-action` attributes, particular element IDs, task text outside inputs — will fail valid implementations. Allow variants: text may render inside inputs, buttons may be identified by label, destructive actions may confirm first. When a check fails, decide whether the run failed the capability or the checker assumed an implementation; a checker bug is fixed and re-run, not scored against the arm.
 
+Each reusable case keeps its grader beside its tracked fixture under `evals/cases/`.
+Run that same grader against every arm. A grader must emit structured results and
+return nonzero when a required objective check fails. Case graders must have
+known-good and known-bad tests; run-local checker edits are not evaluation evidence.
+
 ## Scoring
 
 1. After all runs finish, copy artifacts into neutrally named folders (`run-01/`, `run-02/`, ...) with a private mapping kept aside.
@@ -82,4 +94,8 @@ Objective checks must target user-visible capabilities, not implementation detai
 
 ## Source Learning
 
-Every review must end with source-improvement candidates: recurring issue, upstream file, suggested change. Route fixes to the harness, templates, or this protocol — not to run outputs. Record which harness version the findings apply to.
+Every review must end with source-improvement candidates: recurring issue, upstream
+file, suggested change. Route fixes to the harness, case module, templates, or this
+protocol — not to run outputs. Record which harness and case versions the findings
+apply to. Promote the compact review outcome into the case's tracked `receipts/`
+folder when it informs a durable source change.

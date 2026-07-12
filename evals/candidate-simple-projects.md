@@ -120,15 +120,17 @@ These seed a wrong-but-tempting path with objective ground truth, so context rec
 
 ### 6. Decoy Config Repo
 
-Seed a small repo where a stale `README.md` says the request timeout lives in `config/settings.json`, but the code actually reads it from `src/defaults.py`. Frozen prompt: "Change the request timeout to 30 seconds."
+Tracked case: [`cases/decoy-config-repo/`](cases/decoy-config-repo/).
 
-Ground truth checks:
+The case seeds stale documentation and JSON configuration beside a live Python
+source of truth. It measures source-of-truth recovery, exact runtime verification,
+and protection of decoy files. The case manifest, frozen prompt, fixture, grader,
+and ground truth are canonical in that folder.
 
-- The live config file was edited; the decoy was not treated as the target.
-- The stale doc was flagged rather than silently trusted or silently rewritten.
-- The change was verified by running the code path, not by editing alone.
-
-Result (2026-07-05, harness 0.2.1, `runs/decoy-config-repo/`): the core trap saturates — 9/9 runs across all arms edited the live file and ran the client. The discriminating signal was reporting: harness arms flagged the decoy discrepancy 6/6, control 1/3, and no run flagged the stale README itself. Reuse this task to measure reporting discipline; for a trap frontier models can actually fail, use Undocumented Local Tool or harden this fixture (remove the deprecation docstring, make the decoy config partially live).
+The [harness 0.2.1 receipt](cases/decoy-config-repo/receipts/harness-v0.2.1.md)
+records that the core trap saturated while reporting discipline differed. Reuse it
+for reporting regressions; harden or replace it when source-selection accuracy is
+the primary outcome.
 
 ### 7. Continuation Handoff
 

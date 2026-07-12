@@ -13,7 +13,9 @@ knowledge/sources/                Source ledgers for external research
 knowledge/wiki/                   LLM-maintained synthesis and project tenets
 workspaces/fable-task-harness-build/
                                   Stage contracts for building the harness
-evals/                            Evaluation protocol, arm prompts, rubrics, and run artifacts
+evals/cases/                      Tracked prompts, fixtures, graders, and result receipts
+evals/runs/                       Generated local evaluation artifacts
+evals/                            Shared protocol, arm prompts, rubric, and case catalog
 fable-task-harness/               Installable skill package artifact
 scripts/                          Deterministic repo checks
 ```
@@ -26,7 +28,7 @@ scripts/                          Deterministic repo checks
 | Research agent/workflow methods | `workspaces/fable-task-harness-build/stages/01-research-and-tenets/CONTEXT.md` |
 | Change project architecture | `workspaces/fable-task-harness-build/stages/02-architecture/CONTEXT.md` |
 | Update the skill package | `workspaces/fable-task-harness-build/stages/03-skill-package/CONTEXT.md` |
-| Design or run A/B/C tests | `workspaces/fable-task-harness-build/stages/04-evaluation/CONTEXT.md` |
+| Design tracked cases or run A/B/C tests | `workspaces/fable-task-harness-build/stages/04-evaluation/CONTEXT.md` |
 | Create a new workspace/stage | `_core/templates/`, `_core/CONVENTIONS.md` |
 
 ## Operating Rules

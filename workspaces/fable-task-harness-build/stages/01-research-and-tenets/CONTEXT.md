@@ -9,6 +9,8 @@ Use this stage when external research should influence project structure, harnes
 | Research rules | `../../../../fable-task-harness/references/research-and-source-use.md` | Full file | Source-use discipline |
 | Current synthesis | `../../../../knowledge/wiki/project-structure-tenets.md` | Full file | Existing conclusions |
 | Source ledger | `../../../../knowledge/sources/2026-07-05-folder-agents-source-ledger.md` | Full file | Evidence trail |
+| Harness innovation synthesis | `../../../../knowledge/wiki/agent-harness-innovation-gaps.md` | Full file | Current harness-evaluation tenets and gap map |
+| Harness innovation ledger | `../../../../knowledge/sources/2026-07-12-agent-harness-innovation-source-ledger.md` | Full file | Official and academic evidence through 2026-07-12 |
 | Original plan | `../../../../docs/fable-pseudo-harness-master.md` | Stage 3 and Open Decisions | Fit with accepted plan |
 
 ## Process

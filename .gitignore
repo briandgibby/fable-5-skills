@@ -3,8 +3,9 @@
 .codex/
 .claude/
 .playwright-cli/
+.ua/
 
-# Generated evaluation and stage outputs
+# Generated evaluation runs and stage outputs; tracked cases live in evals/cases/
 evals/runs/*
 !evals/runs/.gitkeep
 workspaces/**/output/*

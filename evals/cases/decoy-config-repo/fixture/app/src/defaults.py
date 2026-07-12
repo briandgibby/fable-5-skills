@@ -1,0 +1,5 @@
+DEFAULTS = {
+    "request_timeout_seconds": 10,
+    "retries": 2,
+    "user_agent": "relay-client/1.2",
+}

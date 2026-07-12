@@ -28,7 +28,9 @@ knowledge/sources/                Source ledgers for external research
 knowledge/wiki/                   Maintained synthesis and project tenets
 workspaces/fable-task-harness-build/
                                   Stage contracts for building the harness
-evals/                            Evaluation protocol, arm prompts, rubrics, and run artifacts
+evals/cases/                      Tracked prompts, fixtures, graders, and result receipts
+evals/runs/                       Generated local evaluation artifacts
+evals/                            Shared protocol, arm prompts, rubric, and case catalog
 fable-task-harness/               Installable skill package artifact (versioned; see its CHANGELOG.md)
 scripts/                          Deterministic repo checks
 ```
@@ -60,7 +62,18 @@ Before shipping changes to the package, run the deterministic checks:
 python scripts\check-skill-package.py
 ```
 
+On macOS or Linux, use `python3 scripts/check-skill-package.py`.
+
 They validate frontmatter YAML, required fields (`name`, `description`, `version`), relative link integrity, and line-count guidance.
+
+Before using or changing tracked evaluation cases, validate their manifests,
+fixtures, graders, and grader tests:
+
+```powershell
+python scripts\check-eval-cases.py
+```
+
+On macOS or Linux, use `python3 scripts/check-eval-cases.py`.
 
 ## Development Workflow
 
@@ -68,11 +81,11 @@ Use the routing files as control surfaces:
 
 1. Start at `AGENTS.md` for the root map.
 2. Use `CONTEXT.md` to choose the relevant workspace, stage, or artifact.
-3. Follow the relevant stage `CONTEXT.md` when changing the harness, architecture, research layer, or evaluation plan.
-4. Keep durable rules in `_core/`, `knowledge/wiki/`, or `fable-task-harness/references/`.
+3. Follow the relevant stage `CONTEXT.md` when changing the harness, architecture, research layer, or evaluation case.
+4. Keep durable rules in `_core/`, `knowledge/wiki/`, `fable-task-harness/references/`, or tracked `evals/cases/` modules.
 5. Keep generated outputs in `evals/runs/` or stage `output/` folders.
 
-Generated run outputs are ignored by default. Commit curated references, templates, rubrics, and source-level fixes.
+Generated run outputs are ignored by default. Commit case manifests, prompts, fixtures, graders, curated receipts, references, templates, rubrics, and source-level fixes.
 
 ## License
 

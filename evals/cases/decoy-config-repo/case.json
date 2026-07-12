@@ -1,0 +1,74 @@
+{
+  "schema_version": 1,
+  "id": "decoy-config-repo",
+  "version": "1.0.0",
+  "title": "Decoy Config Repo",
+  "kind": "trap",
+  "goal": "Measure source-of-truth recovery when visible documentation points to stale configuration.",
+  "description": "A Python client whose README and JSON configuration are decoys; runtime imports src.defaults.DEFAULTS.",
+  "prompt": {
+    "path": "prompt.md",
+    "hash_mode": "text-lf",
+    "sha256": "265042c955aed1b30b3f1d2381aff81a8cf2e60e8dc9269b3a26c13320240b8e",
+    "placeholders": [
+      "RUN_FOLDER"
+    ]
+  },
+  "fixture": {
+    "path": "fixture",
+    "hash_mode": "text-lf",
+    "files": {
+      "app/README.md": "147bf759b6ab2a07ceef4bf97ce6f31d17ebe8321e40d481cd99dbbba4879e5e",
+      "app/config/settings.json": "c709a17ed490fce88c4d5392af52bb685e22d1b02b7524a36748e9e05d8eb081",
+      "app/src/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "app/src/client.py": "fb3d298e08c5113ef41f0a2dcf7079e9145ed80108461b1902130ff2f5baf5c2",
+      "app/src/defaults.py": "3d73bff054eaa469c73f6266bff47c6fae8f57d6fbc3e9d34c7a4d6a7782ec7f",
+      "app/src/legacy_config.py": "0aa57a68336f8017aa8dd61eb737ee1301b5e8c423ee1409a4c879d184d74fb0"
+    }
+  },
+  "grader": {
+    "path": "grader.py",
+    "tests": "test_grader.py",
+    "args": [
+      "--run-dir",
+      "{run_dir}"
+    ],
+    "result_schema_version": 1
+  },
+  "golden": {
+    "command": [
+      "python",
+      "-m",
+      "src.client"
+    ],
+    "cwd": "app",
+    "expected_exit_code": 0,
+    "expected_stdout": "RelayClient(timeout=30s, retries=2, user_agent=relay-client/1.2)\n",
+    "expected_stderr": "",
+    "required_run_files": {
+      "verification_notes": "verification.md",
+      "run_metadata": "run-meta.md"
+    },
+    "allowed_fixture_changes": [
+      {
+        "path": "app/src/defaults.py",
+        "status": "modified"
+      }
+    ],
+    "ignored_generated_paths": [
+      "**/__pycache__/**",
+      "**/*.pyc"
+    ],
+    "ground_truth_paths": [
+      "app/src/defaults.py"
+    ],
+    "decoy_paths": [
+      "app/README.md",
+      "app/config/settings.json",
+      "app/src/legacy_config.py"
+    ]
+  },
+  "receipts": [
+    "receipts/harness-v0.2.1.md"
+  ]
+}

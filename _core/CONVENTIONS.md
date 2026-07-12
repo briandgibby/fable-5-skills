@@ -11,8 +11,8 @@ Agents read down the layers and stop as soon as they have enough context.
 | 0 | `AGENTS.md` | Where am I? |
 | 1 | `CONTEXT.md` | Where do I go? |
 | 2 | `workspaces/*/stages/*/CONTEXT.md` | What do I do? |
-| 3 | `docs/`, `knowledge/wiki/`, `fable-task-harness/references/` | What rules apply? |
-| 4 | Stage `output/`, generated files, current user inputs | What am I working with? |
+| 3 | `docs/`, `knowledge/wiki/`, `fable-task-harness/references/`, `evals/cases/` | What rules apply? |
+| 4 | Stage `output/`, `evals/runs/`, generated files, current user inputs | What am I working with? |
 
 Layer 3 is the factory. Layer 4 is the product. Do not use old outputs as quality standards.
 
@@ -59,7 +59,7 @@ Reusable scaffolds live in `_core/templates/`.
 | `workspace-context-template.md` | New workspace contract |
 | `stage-context-template.md` | New numbered stage contract |
 | `source-ledger-template.md` | New research source ledger |
-| `evaluation-plan-template.md` | New A/B/C test plan |
+| `evaluation-case-template.md` | New tracked evaluation-case module |
 | `status-output-template.md` | Human-readable workspace status |
 
 ## Routing Rules
@@ -70,6 +70,7 @@ Reusable scaffolds live in `_core/templates/`.
 - Every durable fact has one canonical home.
 - Other files point to canonical homes instead of duplicating them.
 - Dependencies point one way. If two files need each other, move shared material into a third canonical file.
+- Evaluation prompts, fixtures, graders, and curated receipts live in `evals/cases/`; generated run outputs live in `evals/runs/`.
 
 ## Knowledge Rules
 

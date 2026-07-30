@@ -7,6 +7,7 @@ This repo builds Fable-derived agent skills and tests them as folder-based, huma
 ```text
 AGENTS.md                         Layer 0: root map and routing hints
 CONTEXT.md                        Layer 1: task routing table
+icm/                              Repository adapter for the central ICM lifecycle
 _core/                            Canonical project conventions and templates
 docs/                             Source design notes from the stage analysis
 knowledge/sources/                Source ledgers for external research
@@ -24,6 +25,7 @@ scripts/                          Deterministic repo checks
 
 | User wants | Read first |
 |------------|------------|
+| Plan or build a nontrivial repository change | icm/CONTEXT.md, then explicit $plan-task or $build-task |
 | Understand project structure | `CONTEXT.md`, `_core/CONVENTIONS.md` |
 | Research agent/workflow methods | `workspaces/fable-task-harness-build/stages/01-research-and-tenets/CONTEXT.md` |
 | Change project architecture | `workspaces/fable-task-harness-build/stages/02-architecture/CONTEXT.md` |
@@ -40,4 +42,7 @@ scripts/                          Deterministic repo checks
 - Prefer plain markdown and local scripts before orchestration frameworks for sequential human-reviewed work.
 - Keep humans in the verification loop for judgment-heavy stages.
 - When recurring output edits reveal a pattern, update the source contract or reference.
+- Changes to the skill package, project architecture, scripts, evaluation protocols, tracked cases, or graders are nontrivial. Planning requires explicit $plan-task; implementation requires separate package approval and explicit $build-task.
+- Small documentation and routing corrections that do not alter behavior or contracts may use the existing minimal workflow.
+- Central ICM policy governs orchestration and external-action boundaries. Keep repository facts in their existing canonical files and do not vendor the central kernel.
 - Keep a proper Git record. Commit coherent, verified milestones and completed work by default unless the user asks not to commit. Keep each commit narrowly scoped, exclude unrelated user changes, and use separate commits when decisions, implementation, or repairs should remain independently reviewable.

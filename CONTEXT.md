@@ -6,6 +6,7 @@ This project turns the useful parts of the Fable 5 methodology into practical ag
 
 | Task type | Workspace or file | Section to load | Why |
 |-----------|-------------------|-----------------|-----|
+| ICM planning and building | `icm/CONTEXT.md` | Full file | Route nontrivial changes through the central ICM lifecycle |
 | Project conventions | `_core/CONVENTIONS.md` | Full file | Canonical folder and authoring rules |
 | Prior stage decisions | `docs/fable-pseudo-harness-master.md` | Stage Decisions and Immediate Next Steps | Accepted design source |
 | Folder-agent research | `knowledge/wiki/project-structure-tenets.md` | Full file | Current synthesis of Van Clief and Karpathy tenets |
@@ -23,15 +24,18 @@ This project turns the useful parts of the Fable 5 methodology into practical ag
 
 ## Process
 
-1. Read the row that matches the user request.
-2. Load only the referenced sections or files.
-3. Follow the relevant stage contract if the task changes files.
-4. Verify changed artifacts before final response.
+1. Classify whether the request is a nontrivial repository change or a small non-behavioral documentation or routing correction.
+2. For nontrivial work, read icm/CONTEXT.md and require the explicit central ICM planning, approval, and build gates.
+3. Otherwise, read the routing row that matches the user request.
+4. Load only the referenced sections or files.
+5. Follow the relevant stage contract if the task changes files.
+6. Verify changed artifacts before final response.
 
 ## Outputs
 
 | Artifact | Location | Format |
 |----------|----------|--------|
+| ICM repository adapter and task packages | `icm/` | Markdown, JSON, and task evidence |
 | Installable skill | `fable-task-harness/` | Codex skill package |
 | Research synthesis | `knowledge/wiki/` | Markdown |
 | Source ledgers | `knowledge/sources/` | Markdown |

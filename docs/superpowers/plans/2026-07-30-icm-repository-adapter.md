@@ -21,6 +21,20 @@
 
 ---
 
+## Course Correction 1: Isolated Worktree Directory
+
+**Deviation:** The selected subagent-driven workflow requires an isolated worktree, but the approved file map did not include the project-local worktree directory or its ignore rule.
+
+**Classification:** Structural and cross-phase because every implementation task runs from the isolated checkout. It does not change product behavior, dependencies, public interfaces, financial calculations, or external state.
+
+**Document update:** Add .gitignore to the modified files and record Task 0 before implementation dispatch.
+
+**Rollback:** Remove the linked worktree with Git, delete the .worktrees/ ignore entry, and revert the setup commit. No irreversible state is created.
+
+**Approval gate:** No additional approval is required. The user selected subagent-driven execution, whose required workflow explicitly mandates worktree isolation.
+
+---
+
 ## File Map
 
 **Create:**
@@ -35,6 +49,7 @@
 
 **Modify:**
 
+- .gitignore — keep the project-local isolated worktree directory out of version control.
 - AGENTS.md — route nontrivial changes into ICM and retain the small-correction exception.
 - CONTEXT.md — expose the ICM adapter in the task router and outputs.
 - _core/CONVENTIONS.md — define how the ICM control plane relates to the five-layer content model.
@@ -46,6 +61,51 @@
 - evals/**
 - workspaces/**
 - Central ICM source in the sibling ICM-agentic-system repository.
+
+---
+
+### Task 0: Isolated Worktree Setup
+
+**Files:**
+
+- Modify: .gitignore
+- Modify: docs/superpowers/plans/2026-07-30-icm-repository-adapter.md
+
+**Interfaces:**
+
+- Consumes: the subagent-driven-development requirement for worktree isolation.
+- Produces: an ignored .worktrees/ directory and a codex/icm-repository-adapter branch rooted at the approved implementation-plan commit.
+
+- [x] **Step 1: Add .worktrees/ to the local-agent section of .gitignore**
+
+~~~text
+.worktrees/
+~~~
+
+- [x] **Step 2: Record this course correction in the implementation plan**
+
+The Course Correction 1 section and this task are the durable record. No product requirement or implementation task changes.
+
+- [ ] **Step 3: Verify and commit the setup record**
+
+~~~powershell
+git check-ignore -v .worktrees
+git diff --check
+git add -- .gitignore docs/superpowers/plans/2026-07-30-icm-repository-adapter.md
+git diff --cached --check
+git commit -m "chore: prepare isolated ICM worktree"
+~~~
+
+- [ ] **Step 4: Create and verify the isolated workspace**
+
+~~~powershell
+git worktree add .worktrees/icm-repository-adapter -b codex/icm-repository-adapter
+python scripts/check-skill-package.py
+python scripts/check-eval-cases.py
+python -m unittest discover -s scripts/tests -v
+~~~
+
+Expected: the new worktree is on codex/icm-repository-adapter; package and evaluation checks exit 0; unittest runs 24 tests and prints OK.
 
 ---
 

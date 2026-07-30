@@ -4,6 +4,7 @@
 .claude/
 .playwright-cli/
 .ua/
+.worktrees/
 
 # Generated evaluation runs and stage outputs; tracked cases live in evals/cases/
 evals/runs/*

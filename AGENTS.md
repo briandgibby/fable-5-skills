@@ -40,3 +40,4 @@ scripts/                          Deterministic repo checks
 - Prefer plain markdown and local scripts before orchestration frameworks for sequential human-reviewed work.
 - Keep humans in the verification loop for judgment-heavy stages.
 - When recurring output edits reveal a pattern, update the source contract or reference.
+- Keep a proper Git record. Commit coherent, verified milestones and completed work by default unless the user asks not to commit. Keep each commit narrowly scoped, exclude unrelated user changes, and use separate commits when decisions, implementation, or repairs should remain independently reviewable.

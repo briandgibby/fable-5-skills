@@ -325,7 +325,7 @@ Run:
 python -m unittest scripts.tests.test_check_icm_repository -v
 ~~~
 
-Expected: 8 failures because scripts/check-icm-repository.py does not exist.
+Expected: 8 tests run and fail because scripts/check-icm-repository.py does not exist; unittest records 10 failing subtest entries because the profile-version and path tests each exercise two values.
 
 - [ ] **Step 3: Implement the minimal checker**
 

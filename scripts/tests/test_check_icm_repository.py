@@ -160,6 +160,12 @@ class CheckIcmRepositoryTests(unittest.TestCase):
             result.stderr,
         )
 
+    def test_checked_in_repository_passes(self):
+        result = self.run_checker(REPO_ROOT)
+
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertIn("icm repository adapter: all checks passed", result.stdout)
+
 
 if __name__ == "__main__":
     unittest.main()

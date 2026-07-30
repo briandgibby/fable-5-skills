@@ -1,0 +1,46 @@
+{
+  "profile_version": 1,
+  "repository_name": "fable-5-skills",
+  "commands": {
+    "test": [
+      "python scripts/check-icm-repository.py",
+      "python scripts/check-skill-package.py",
+      "python scripts/check-eval-cases.py",
+      "python -m unittest discover -s scripts/tests -v"
+    ],
+    "lint": [],
+    "typecheck": [],
+    "build": []
+  },
+  "paths": {
+    "source": [
+      "AGENTS.md",
+      "CONTEXT.md",
+      "README.md",
+      "_core/",
+      "docs/",
+      "evals/",
+      "fable-task-harness/",
+      "knowledge/",
+      "scripts/",
+      "workspaces/"
+    ],
+    "tests": [
+      "scripts/tests/",
+      "evals/cases/"
+    ]
+  },
+  "task_profile_triggers": {
+    "high_risk": [
+      "security",
+      "authentication",
+      "authorization",
+      "migration",
+      "destructive",
+      "financial",
+      "irreversible",
+      "external-side-effect"
+    ]
+  },
+  "domain_review_rubrics": []
+}

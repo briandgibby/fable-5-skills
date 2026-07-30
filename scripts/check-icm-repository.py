@@ -89,7 +89,8 @@ def validate_profile(repo_root: Path, profile: object) -> list[str]:
     if not isinstance(profile, dict):
         return errors
 
-    if profile.get("profile_version") != 1:
+    version = profile.get("profile_version")
+    if not (type(version) is int and version == 1):
         errors.append("profile_version must be 1")
     name = profile.get("repository_name")
     if not isinstance(name, str) or not name.strip():

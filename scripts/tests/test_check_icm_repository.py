@@ -100,6 +100,20 @@ class CheckIcmRepositoryTests(unittest.TestCase):
             result.stderr,
         )
 
+    def test_profile_version_must_be_integer_one(self):
+        for value in (True, 1.0):
+            with self.subTest(value=value), tempfile.TemporaryDirectory() as temp_dir:
+                repo_root = Path(temp_dir)
+                write_valid_repository(repo_root)
+                profile = valid_profile()
+                profile["profile_version"] = value
+                write_profile(repo_root, profile)
+
+                result = self.run_checker(repo_root)
+
+            self.assertEqual(result.returncode, 1)
+            self.assertIn("profile_version must be 1", result.stderr)
+
     def test_profile_paths_must_be_relative_and_exist(self):
         mutations = (
             ("../outside", "must be a relative path inside the repository"),

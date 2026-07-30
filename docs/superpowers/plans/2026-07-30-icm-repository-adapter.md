@@ -35,6 +35,14 @@
 
 ---
 
+## Course Correction 2: Exact Profile-Version Type
+
+**Deviation:** Final review found that the checker accepted JSON `true` and `1.0` as `profile_version: 1`, leaving an exact-type schema gap.
+
+**Classification:** Structural and reversible, with no safety impact. The checker, regression test, and implementation plan are updated; no new dependency or scope is introduced.
+
+---
+
 ## File Map
 
 **Create:**
@@ -230,6 +238,20 @@ class CheckIcmRepositoryTests(unittest.TestCase):
             result.stderr,
         )
 
+    def test_profile_version_must_be_integer_one(self):
+        for value in (True, 1.0):
+            with self.subTest(value=value), tempfile.TemporaryDirectory() as temp_dir:
+                repo_root = Path(temp_dir)
+                write_valid_repository(repo_root)
+                profile = valid_profile()
+                profile["profile_version"] = value
+                write_profile(repo_root, profile)
+
+                result = self.run_checker(repo_root)
+
+            self.assertEqual(result.returncode, 1)
+            self.assertIn("profile_version must be 1", result.stderr)
+
     def test_profile_paths_must_be_relative_and_exist(self):
         mutations = (
             ("../outside", "must be a relative path inside the repository"),
@@ -303,7 +325,7 @@ Run:
 python -m unittest scripts.tests.test_check_icm_repository -v
 ~~~
 
-Expected: 7 failures because scripts/check-icm-repository.py does not exist.
+Expected: 8 failures because scripts/check-icm-repository.py does not exist.
 
 - [ ] **Step 3: Implement the minimal checker**
 
@@ -401,7 +423,8 @@ def validate_profile(repo_root: Path, profile: object) -> list[str]:
     if not isinstance(profile, dict):
         return errors
 
-    if profile.get("profile_version") != 1:
+    version = profile.get("profile_version")
+    if not (type(version) is int and version == 1):
         errors.append("profile_version must be 1")
     name = profile.get("repository_name")
     if not isinstance(name, str) or not name.strip():
@@ -528,7 +551,7 @@ Run:
 python -m unittest scripts.tests.test_check_icm_repository -v
 ~~~
 
-Expected: 7 tests run and OK.
+Expected: 8 tests run and OK.
 
 - [ ] **Step 5: Verify and commit the checker slice**
 
@@ -727,7 +750,7 @@ python -m unittest scripts.tests.test_check_icm_repository -v
 python scripts/check-icm-repository.py
 ~~~
 
-Expected: 8 checker tests run and OK; the checked-in adapter command exits 0 with "icm repository adapter: all checks passed".
+Expected: 9 checker tests run and OK; the checked-in adapter command exits 0 with "icm repository adapter: all checks passed".
 
 - [ ] **Step 9: Verify and commit the adapter slice**
 
@@ -875,7 +898,7 @@ Expected:
 - ICM adapter checker exits 0.
 - Skill package checker prints "fable-task-harness: all checks passed".
 - Evaluation checker prints "decoy-config-repo: valid".
-- unittest runs 32 tests and prints OK.
+- unittest runs 33 tests and prints OK.
 - Git whitespace check exits 0.
 
 - [ ] **Step 7: Review scope and commit the routing slice**

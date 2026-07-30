@@ -23,13 +23,13 @@
 
 ## Course Correction 1: Isolated Worktree Directory
 
-**Deviation:** The selected subagent-driven workflow requires an isolated worktree, but the approved file map did not include the project-local worktree directory or its ignore rule.
+**Deviation:** The selected subagent-driven workflow requires an isolated worktree and scratch progress artifacts, but the approved file map did not include the project-local worktree directory, the .superpowers/ scratch directory, or their ignore rules.
 
 **Classification:** Structural and cross-phase because every implementation task runs from the isolated checkout. It does not change product behavior, dependencies, public interfaces, financial calculations, or external state.
 
 **Document update:** Add .gitignore to the modified files and record Task 0 before implementation dispatch.
 
-**Rollback:** Remove the linked worktree with Git, delete the .worktrees/ ignore entry, and revert the setup commit. No irreversible state is created.
+**Rollback:** Remove the linked worktree with Git, delete the .worktrees/ and .superpowers/ ignore entries, and revert the setup commits. No irreversible state is created.
 
 **Approval gate:** No additional approval is required. The user selected subagent-driven execution, whose required workflow explicitly mandates worktree isolation.
 
@@ -49,7 +49,7 @@
 
 **Modify:**
 
-- .gitignore — keep the project-local isolated worktree directory out of version control.
+- .gitignore — keep the project-local isolated worktree and subagent scratch directories out of version control.
 - AGENTS.md — route nontrivial changes into ICM and retain the small-correction exception.
 - CONTEXT.md — expose the ICM adapter in the task router and outputs.
 - _core/CONVENTIONS.md — define how the ICM control plane relates to the five-layer content model.
@@ -74,11 +74,12 @@
 **Interfaces:**
 
 - Consumes: the subagent-driven-development requirement for worktree isolation.
-- Produces: an ignored .worktrees/ directory and a codex/icm-repository-adapter branch rooted at the approved implementation-plan commit.
+- Produces: ignored .worktrees/ and .superpowers/ directories plus a codex/icm-repository-adapter branch rooted at the approved implementation-plan commit.
 
-- [x] **Step 1: Add .worktrees/ to the local-agent section of .gitignore**
+- [x] **Step 1: Add .superpowers/ and .worktrees/ to the local-agent section of .gitignore**
 
 ~~~text
+.superpowers/
 .worktrees/
 ~~~
 
@@ -86,7 +87,7 @@
 
 The Course Correction 1 section and this task are the durable record. No product requirement or implementation task changes.
 
-- [ ] **Step 3: Verify and commit the setup record**
+- [x] **Step 3: Verify and commit the setup record**
 
 ~~~powershell
 git check-ignore -v .worktrees
@@ -96,7 +97,7 @@ git diff --cached --check
 git commit -m "chore: prepare isolated ICM worktree"
 ~~~
 
-- [ ] **Step 4: Create and verify the isolated workspace**
+- [x] **Step 4: Create and verify the isolated workspace**
 
 ~~~powershell
 git worktree add .worktrees/icm-repository-adapter -b codex/icm-repository-adapter

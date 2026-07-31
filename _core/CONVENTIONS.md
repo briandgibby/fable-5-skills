@@ -16,6 +16,14 @@ Agents read down the layers and stop as soon as they have enough context.
 
 Layer 3 is the factory. Layer 4 is the product. Do not use old outputs as quality standards.
 
+## ICM Control Plane
+
+The five-layer model controls what project context an agent reads. The repository icm/ adapter controls how nontrivial changes are planned, approved, built, evidenced, and reviewed through the separately maintained central ICM kernel.
+
+Changes to the skill package, project architecture, scripts, evaluation protocols, tracked cases, or graders require explicit $plan-task, separate task-package approval, and explicit $build-task. Small documentation and routing corrections that do not alter behavior or contracts retain the minimal workflow.
+
+Repository facts keep their existing canonical homes. The icm/ layer routes to those facts and stores task packages; it does not duplicate project knowledge or central kernel policy.
+
 ## Stage Contracts
 
 Every stage `CONTEXT.md` uses this shape:

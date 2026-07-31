@@ -22,6 +22,7 @@ Source notes live in `knowledge/sources/`, and the current project synthesis liv
 ```text
 AGENTS.md                         Root map and routing hints
 CONTEXT.md                        Task routing table
+icm/                              Repository adapter and task records for central ICM
 _core/                            Canonical conventions and templates
 docs/                             Source design notes from stage analysis
 knowledge/sources/                Source ledgers for external research
@@ -74,6 +75,20 @@ python scripts\check-eval-cases.py
 ```
 
 On macOS or Linux, use `python3 scripts/check-eval-cases.py`.
+
+## ICM Workflow
+
+Nontrivial repository changes use the separately installed central ICM kernel. This repository contains only its repository-specific adapter; central contracts, policies, skills, templates, and validators remain in ICM-agentic-system.
+
+Changes to the skill package, project architecture, scripts, evaluation protocols, tracked cases, or graders follow this lifecycle:
+
+1. Explicitly invoke $plan-task with one change request.
+2. Review the generated icm/tasks/<task-id>/ request, specification, plan, and context manifest.
+3. In a later explicit $plan-task invocation, approve that unchanged task package.
+4. Explicitly invoke $build-task with the approved task directory.
+5. Inspect the resulting local commits, verification evidence, and independent review before separately deciding whether to integrate them.
+
+Small documentation and routing corrections that do not alter behavior or contracts continue through the lightweight development workflow below. If the central kernel is unavailable or task approval is stale, stop rather than creating a repository-local fallback.
 
 ## Development Workflow
 
